@@ -2,13 +2,14 @@
 #include <stdio.h>
 #include <sys/socket.h>
 #include <stdlib.h>
+60
+        cout << "Enter " << CLOSE << " to close the connection" << endl;
 #include <netinet/in.h>
 #include <string.h>
 #include <iostream>
 
 using namespace std;
 
-#define CLOSE '#'
 #define PORT 8228
 #define BUFFER_SIZE 1024
 
@@ -57,7 +58,6 @@ int main(int argc, char const *argv[]) {
 
     while (new_socket > 0) {
         cout << "Connected to the client #1" << endl;
-        cout << "Enter " << CLOSE << " to close the connection" << endl;
 
         while (true) {
             if (new_socket < 0) {
@@ -66,6 +66,9 @@ int main(int argc, char const *argv[]) {
 
             cout << "Client" << " => ";
             recv(new_socket, buffer, BUFFER_SIZE, 0);
+            
+            for(int i = 0; (i < 1024 && buffer[i] != '\0'); i++)
+                buffer[i] = buffer[i] - 2;
             cout << buffer << endl;
 
             if (new_socket < 0) {
@@ -74,6 +77,10 @@ int main(int argc, char const *argv[]) {
 
             cout << "You   " << " => ";
             cin.getline(buffer, BUFFER_SIZE);
+            
+            for(int i = 0; (i < 1024 && buffer[i] != '\0'); i++)
+            buffer[i] = buffer[i] + 2;
+            
             send(new_socket, buffer, BUFFER_SIZE, 0);
 
             if (new_socket < 0) {
