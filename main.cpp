@@ -2,8 +2,6 @@
 #include <stdio.h>
 #include <sys/socket.h>
 #include <stdlib.h>
-60
-        cout << "Enter " << CLOSE << " to close the connection" << endl;
 #include <netinet/in.h>
 #include <string.h>
 #include <iostream>
